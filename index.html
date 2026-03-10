@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carta para ti ❤️</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #00001a;
+            padding: 15px;
+            font-family: 'Palatino Linotype', serif;
+        }
+        .contenedor { max-width: 90%; margin: 0 auto; }
+
+        /* PANTALLA INICIO */
+        #inicio {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(#fff0f5, #ffe6f2);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            padding: 20px;
+        }
+        #inicio h1 {
+            color: #33001a;
+            font-size: 2.2rem;
+            font-family: 'Segoe Script', cursive;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 3px rgba(51, 0, 26, 0.2);
+            text-align: center;
+        }
+        #foto-inicio {
+            max-width: 80%;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(51, 0, 26, 0.3);
+        }
+        #inicio h2 { color: #33001a; font-size: 1.5rem; margin-bottom: 30px; }
+        .btn {
+            padding: 12px 25px;
+            border: 2px solid #33001a;
+            border-radius: 25px;
+            background: #fff;
+            color: #33001a;
+            font-size: 1.1rem;
+            margin: 0 10px;
+            cursor: pointer;
+        }
+        .btn:hover { background: #33001a; color: #fff; }
+
+        /* PÁGINAS */
+        #pagina-1, #pagina-2, #pagina-3, #pagina-4, #pagina-5 { display: none; }
+
+        /* SECCIÓN MÚSICA */
+        .musica {
+            background: #fff;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .musica h3 { color: #33001a; font-size: 1.2rem; margin-bottom: 15px; }
+        iframe { width: 100%; height: 80px; border: 0; border-radius: 12px; }
+        #letra {
+            font-family: 'Courier New', monospace;
+            color: #33001a;
+            min-height: 40px;
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.3s;
+        }
+
+        /* CARTA Y FOTOS */
+        .carta, .frase-final, .frase-ingles, .enlace-final {
+            background: #fff;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            color: #33001a;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        .foto, .foto-adicional, .carrusel-fotos {
+            background: #fff;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .foto img, .foto-adicional img, .carrusel-imagen {
+            max-width: 100%;
+            border-radius: 15px;
+        }
+
+        /* CARRUSEL */
+        .carrusel-contenedor { position: relative; width: 100%; height: auto; }
+        .carrusel-imagen {
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .carrusel-imagen.activa { opacity: 1; position: relative; }
+
+        /* TÍTULOS */
+        .titulo-pagina1, .titulo-pagina2, .titulo-pagina3, .titulo-pagina4, .titulo-pagina5 {
+            background: #fff;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            text-align: center;
+            color: #33001a;
+            box-shadow: 0 3px 12px rgba(51, 0, 26, 0.2);
+            font-family: 'Great Vibes', cursive;
+            font-weight: normal;
+            font-size: 2.1rem;
+        }
+
+        .frase-ingles {
+            text-align: center;
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.3rem;
+            line-height: 1.8;
+        }
+
+        /* NAVEGACIÓN */
+        .navegacion {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .navegacion button {
+            padding: 8px 16px;
+            margin: 0 10px;
+            border: 2px solid #fff;
+            border-radius: 20px;
+            background: transparent;
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .navegacion button:hover { background: #fff; color: #00001a; }
+        
+        .enlace-final a {
+            color: #ff4d94;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="contenedor">
+        <div id="inicio">
+            <h1>Hoy está muy linda la luna</h1>
+            <img id="foto-inicio" src="fotoinicio.png" alt="Luna bonita">
+            <h2>¿Quieres leer la carta?</h2>
+            <div>
+                <button class="btn" id="btn-si">SÍ</button>
+                <button class="btn" id="btn-no">NO</button>
+            </div>
+        </div>
+
+        <div id="pagina-1">
+            <div class="titulo-pagina1">Tú y yo</div>
+            <div class="musica">
+                <h3>✨ Moonstruck - ENHYPEN</h3>
+                <iframe src="https://open.spotify.com/embed/track/3gYWGRS64XrGSrjD3vvtga?utm_source=generator" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                <div id="letra"></div>
+            </div>
+            <div class="foto-adicional">
+                <img src="foto.png" alt="Foto adicional">
+            </div>
+            <div class="carta">
+                <p>Hoy quiero revelar lo fuerte que de verdad, quiero decirte desde hace tiempo. Quiero abrazarte despacio si necesidad de apuros, mientras que nuestro entorno se vuelva más tranquilo; que nuestras miradas se conecten entero, donde aprecio tu belleza, mirando esos ojos claros y puros, y decirte lo que, de verdad, pasa en nuestro entorno, y dejarlo claro que todo salga la verdad.</p>
+            </div>
+            <div class="foto">
+                <img src="foto1.png" alt="Recuerdo especial">
+            </div>
+            <div class="frase-final">
+                <p>Siento que a veces eres solo tú en mis momentos donde quiero encerrarme donde no vea más personas y solo estés tú mientras brillas sin necesidad de destacar con todos. Para mí eres...</p>
+            </div>
+            <div class="navegacion">
+                <button id="btn-regresar1">Regresar al inicio</button>
+                <button id="btn-sig1">Siguiente página</button>
+            </div>
+        </div>
+
+        <div id="pagina-2">
+            <div class="titulo-pagina2">Nosotros dos</div>
+            <div class="foto">
+                <img src="foto2.png" alt="Momento juntos">
+            </div>
+            <div class="carta">
+                <p>Quiero hablarte de algo que llevo desde hace tiempo, ya que desde que volvimos a hablar demasiado hemos vuelto a estar muy cerca, y eso me ha hecho ver muchas cosas.</p>
+                <p style="margin-top: 15px;">La verdad es que te he estado admirando desde hace tiempo, me encanta cómo eres y cómo haces que cada momento contigo sea especial. Pero todo cambió cuando empezaron esos sueños raros que tengo contigo; fue ahí cuando me di cuenta de que siento un gran sentimiento por ti, mucho más allá de la amistad.</p>
+                <p style="margin-top: 15px;">Yo lo sé, y lo digo claro: no quiero ni de broma arruinar lo nuestro. Eres lo más importante en mi vida. Tú sabes que eres el Seung de mi Hyun. Por eso quiero proponerte algo: me encantaría seguir siendo tu amigo, pero ¿qué tal si intentamos algo más? Tal vez si no funciona, podamos seguir siendo amigos igual, o por lo menos experimentar para saber qué pasa.</p>
+                <p style="margin-top: 25px; text-align: right; font-weight: bold;">-Tata (Teodor)</p>
+            </div>
+            <div class="musica">
+                <h3>🎵 Eres - Café Tacvba</h3>
+                <iframe src="https://open.spotify.com/embed/track/4S9Xv7OOfAnS8OfvSscW8v?utm_source=generator" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            </div>
+            <div class="navegacion">
+                <button id="btn-regresar2">Regresar página anterior</button>
+                <button id="btn-sig2">Siguiente página</button>
+            </div>
+        </div>
+
+        <div id="pagina-3">
+            <div class="titulo-pagina3">~Hyunseung~💕</div>
+            <div class="musica">
+                <h3>❤️ Always Love - d4vd (feat. Hyunjin)</h3>
+                <iframe src="https://open.spotify.com/embed/track/10CqCqf5nO8YJ78XmJ0kF3?utm_source=generator" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            </div>
+            <div class="carrusel-fotos">
+                <div class="carrusel-contenedor">
+                    <img src="foto3.png" alt="Foto 3" class="carrusel-imagen activa">
+                    <img src="foto4.png" alt="Foto 4" class="carrusel-imagen">
+                    <img src="foto5.png" alt="Foto 5" class="carrusel-imagen">
+                </div>
+            </div>
+            <div class="frase-ingles">
+                <p>All my life, I tried to find</p>
+                <p>Someone that won't make me lose my mind</p>
+                <p>So tell me if it's now or never</p>
+                <p>'Cause with you, I see forever</p>
+                <p>I think you could make me better, better</p>
+            </div>
+            <div class="navegacion">
+                <button id="btn-regresar3">Regresar página anterior</button>
+                <button id="btn-sig3">Siguiente página</button>
+            </div>
+        </div>
+
+        <div id="pagina-4">
+            <div class="titulo-pagina4">Momento especial</div>
+            <div class="foto">
+                <img src="foto6.png" alt="Foto especial">
+            </div>
+            <div class="musica">
+                <h3>🎶 Nuestra Canción</h3>
+                <audio controls style="width: 100%;">
+                    <source src="mi_cancion.mp3" type="audio/mpeg">
+                    Tu navegador no soporta el elemento de audio.
+                </audio>
+            </div>
+            <div class="navegacion">
+                <button id="btn-regresar4">Regresar</button>
+                <button id="btn-sig4">Siguiente página</button>
+            </div>
+        </div>
+
+        <div id="pagina-5">
+            <div class="titulo-pagina5">Para terminar...</div>
+            <div class="foto">
+                <img src="foto7.png" alt="Foto final">
+            </div>
+            <div class="enlace-final" style="text-align: center;">
+                <p>Tengo algo más para ti aquí:</p><br>
+                <a href="#" target="_blank">Haz clic aquí para verlo ❤️</a>
+            </div>
+            <div class="navegacion">
+                <button id="btn-regresar5">Regresar</button>
+                <button id="btn-inicio-final">Regresar al inicio</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Lógica de navegación
+        document.getElementById('btn-si').addEventListener('click', function() {
+            document.getElementById('inicio').style.display = 'none';
+            document.getElementById('pagina-1').style.display = 'block';
+            iniciarLetra();
+        });
+
+        document.getElementById('btn-no').addEventListener('click', function() {
+            alert('¡Cuando quieras! Abre el archivo de nuevo 😉');
+        });
+
+        document.getElementById('btn-regresar1').addEventListener('click', function() { location.reload(); });
+        document.getElementById('btn-sig1').addEventListener('click', function() {
+            document.getElementById('pagina-1').style.display = 'none';
+            document.getElementById('pagina-2').style.display = 'block';
+        });
+
+        document.getElementById('btn-regresar2').addEventListener('click', function() {
+            document.getElementById('pagina-2').style.display = 'none';
+            document.getElementById('pagina-1').style.display = 'block';
+        });
+        document.getElementById('btn-sig2').addEventListener('click', function() {
+            document.getElementById('pagina-2').style.display = 'none';
+            document.getElementById('pagina-3').style.display = 'block';
+            iniciarCarrusel();
+        });
+
+        document.getElementById('btn-regresar3').addEventListener('click', function() {
+            document.getElementById('pagina-3').style.display = 'none';
+            document.getElementById('pagina-2').style.display = 'block';
+        });
+        document.getElementById('btn-sig3').addEventListener('click', function() {
+            document.getElementById('pagina-3').style.display = 'none';
+            document.getElementById('pagina-4').style.display = 'block';
+        });
+
+        document.getElementById('btn-regresar4').addEventListener('click', function() {
+            document.getElementById('pagina-4').style.display = 'none';
+            document.getElementById('pagina-3').style.display = 'block';
+        });
+        document.getElementById('btn-sig4').addEventListener('click', function() {
+            document.getElementById('pagina-4').style.display = 'none';
+            document.getElementById('pagina-5').style.display = 'block';
+        });
+
+        document.getElementById('btn-regresar5').addEventListener('click', function() {
+            document.getElementById('pagina-5').style.display = 'none';
+            document.getElementById('pagina-4').style.display = 'block';
+        });
+        document.getElementById('btn-inicio-final').addEventListener('click', function() { location.reload(); });
+
+        // Función de letra (Página 1)
+        function iniciarLetra() {
+            const letras = [
+                { tiempo: 2500, texto: "over you (you), you, baby" },
+                { tiempo: 5500, texto: "Let me hold you close (close), 떠오른 달 그 위로 (위로)" },
+                { tiempo: 11000, texto: "이 밤을 날아, crazy over you (you), you, baby" },
+                { tiempo: 16500, texto: "We can take it slow (slow), 황홀에 빠진 moonstruck" },
+                { tiempo: 23000, texto: "Oh, you make me go crazy over you (you), you, baby" },
+                { tiempo: 29000, texto: "Let me hold you close (close), 너를 느끼고 싶어" }
+            ];
+
+            const contenedor = document.getElementById('letra');
+            contenedor.textContent = letras[0].texto;
+
+            letras.slice(1).forEach(function(linea) {
+                setTimeout(function() {
+                    contenedor.style.opacity = 0;
+                    setTimeout(function() {
+                        contenedor.textContent = linea.texto;
+                        contenedor.style.opacity = 1;
+                    }, 300);
+                }, linea.tiempo);
+            });
+        }
+
+        // Función Carrusel (Página 3)
+        let carruselIntervalo;
+        function iniciarCarrusel() {
+            if (carruselIntervalo) return;
+            const imagenes = document.querySelectorAll('.carrusel-imagen');
+            let indiceActual = 0;
+            carruselIntervalo = setInterval(function() {
+                imagenes[indiceActual].classList.remove('activa');
+                indiceActual = (indiceActual + 1) % imagenes.length;
+                imagenes[indiceActual].classList.add('activa');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
